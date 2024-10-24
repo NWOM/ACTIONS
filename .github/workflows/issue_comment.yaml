@@ -1,0 +1,17 @@
+name: Create a comment on new issues
+
+on: 
+  issues:
+    types: [opened]
+
+jobs:
+  comment-with-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+        shell: bash
+
+      - name: Dump Github Context
+        run: echo '${{ toJSON(github.event) }}' | jq
+        shell: bash
